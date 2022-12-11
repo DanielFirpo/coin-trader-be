@@ -26,7 +26,7 @@
     "multer-s3": "^2.9.0",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
-    "nodemailer": "^6.4.10",
+    "nodemailer": "^6.6.1",
     "nodemon": "^2.0.3",
     "password-validator": "^5.0.3",
     "paypal-rest-sdk": "^1.8.1",
