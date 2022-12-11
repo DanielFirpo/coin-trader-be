@@ -82,7 +82,7 @@ router.get('/search', (req, res) => {
                 filter.maxYear = parseInt(filter.maxYear)
             }
             else {
-                filter.maxYear = 100000;//something big so if they don't specificy upper bounds it will include all
+                filter.maxYear = 99999999999;//something big so if they don't specificy upper bounds it will include all
             }
         }
         catch {

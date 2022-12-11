@@ -145,7 +145,8 @@ router.post('/login', (req, res) => {
                     });
                     // Passwords match
                     let isAdmin = false
-                    if (process.env.ADMIN_ACC_USERNAME === req.body.usernameOrEmail || process.env.ADMIN_ACC_EMAIL === req.body.usernameOrEmail) {
+                    console.log("process.env.ADMIN_ACC_USERNAME === req.body.usernameOrEmail", process.env.ADMIN_ACC_USERNAME, req.body.usernameOrEmail, "process.env.ADMIN_ACC_EMAIL === req.body.usernameOrEmail", process.env.ADMIN_ACC_EMAIL, req.body.usernameOrEmail)
+                    if (process.env.ADMIN_ACC_USERNAME == req.body.usernameOrEmail || process.env.ADMIN_ACC_EMAIL == req.body.usernameOrEmail) {
                         isAdmin = true
                     }
                     res.status(200).send({ message: "Logged In Successfully.", token: token, administrator: isAdmin })
@@ -260,13 +261,22 @@ router.put('/updatepassword', restricted, (req, res) => {
         return res.status(400).send({ message: "Password is too weak. Must be at least 8 characters long, have at least one upper and one lower case letter, and have at least one number.", errors: schema.validate("" + req.body.password, { list: true }) })
     }
 
-    bcrypt.hash('' + req.body.password, 10, function (err, hash) {
-        db.query(`UPDATE users SET passhash = '${hash}' WHERE id = ${req.userId}`, (err, rows) => {
-            if (err) {
-                console.log(err)
-                return res.status(400).send({ message: "Something went wrong. Please try again.", errors: err })
-            }
-            return res.status(200).send({ message: "Success" });
+    db.query(`SELECT username, email FROM users WHERE id = ${req.userId}`, (err, rows) => {
+        if (err) {
+            return res.status(400).send({ message: "Something went wrong. Please try again.", errors: err })
+        }
+        console.log(rows);
+        if(rows[0].email == "ADMIN" || rows[0].email == "USER") {
+            return res.status(400).send({ message: "Not allowed to change password of a test account." })
+        }
+        bcrypt.hash('' + req.body.password, 10, function (err, hash) {
+            db.query(`UPDATE users SET passhash = '${hash}' WHERE id = ${req.userId}`, (err, rows) => {
+                if (err) {
+                    console.log(err)
+                    return res.status(400).send({ message: "Something went wrong. Please try again.", errors: err })
+                }
+                return res.status(200).send({ message: "Success" });
+            })
         })
     })
 })

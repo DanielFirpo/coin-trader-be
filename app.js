@@ -28,7 +28,6 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(bodyParser())
 app.use(bodyParser.json({limit:'5mb'})); 
 app.use(bodyParser.urlencoded({extended:true, limit:'5mb'}));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -65,7 +64,7 @@ app.use(function (err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  console.log(err.message)
+  console.log(err.message, err)
 
   // render the error page
   res.status(err.status || 500);
