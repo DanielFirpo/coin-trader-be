@@ -14,79 +14,191 @@ mysqlConfig = {
 console.log("connecting to db with config ", mysqlConfig);
 var pool = mysql.createPool(mysqlConfig);
 
+
+//create required tables add some example data if not added
 pool.query(
   "CREATE TABLE IF NOT EXISTS `coins` (`id` int NOT NULL AUTO_INCREMENT, `name` varchar(1000) DEFAULT 'Unamed Coin', `front_image_name` varchar(1000) NOT NULL DEFAULT 'noimage', `year` int DEFAULT NULL,`price` int DEFAULT NULL, `description` varchar(1000) DEFAULT NULL, `status` tinyint DEFAULT '0', `rating` tinyint DEFAULT '0' COMMENT '0 = poor\\n1 = average\\n2 = great\\n3 = exellent',`manufacturer` tinyint DEFAULT '0' COMMENT '0 = P\n1 = S\n2 = D',`back_image_name` varchar(1000) NOT NULL DEFAULT 'noimage.png',PRIMARY KEY (`id`)) ENGINE=InnoDB AUTO_INCREMENT=153 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='status:\n0 = unlisted\n1 = listed\n2 = sold';",
   (err, rows) => {
     console.log("created coins", rows);
+
     pool.query(
-      `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Fantastic Coin', '1front', '1back', '1997', '1299', 'An old coin in fantastic condition', '1', '3', '0')`,
-      (err, result, fields) => {
-        console.log("worked", err, result, fields);
+      `SELECT * FROM coins WHERE back_image_name='1back'`,
+      (err, rows) => {
+        console.log(rows);
+        if (rows.length == 0) {
+          pool.query(
+            `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Fantastic Coin', '1front', '1back', '1997', '1299', 'An old coin in fantastic condition', '1', '3', '0')`
+          );
+        }
       }
     );
 
+    pool.query(`SELECT * FROM coins WHERE back_image_name='2back'`, (err, rows) => {
+      console.log(rows);
+      if (rows.length == 0) {
+        pool.query(
+          `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Golden Treasure', '2front', '2back', '1995', '999', 'A beautiful and rare coin from 1995', '1', '3', '1')`
+        );
+      }
+    });
+    
+    pool.query(`SELECT * FROM coins WHERE back_image_name='3back'`, (err, rows) => {
+      console.log(rows);
+      if (rows.length == 0) {
+        pool.query(
+          `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Mysterious Coin', '3front', '3back', '2000', '899', 'A unique and intriguing coin from 2000', '1', '2', '2')`
+        );
+      }
+    });
+    
+    pool.query(`SELECT * FROM coins WHERE back_image_name='4back'`, (err, rows) => {
+      console.log(rows);
+      if (rows.length == 0) {
+        pool.query(
+          `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Fabled Coin', '4front', '4back', '1990', '1499', 'A legendary coin with a rich history', '1', '2', '0')`
+        );
+      }
+    });
+    
+    pool.query(`SELECT * FROM coins WHERE back_image_name='5back'`, (err, rows) => {
+      console.log(rows);
+      if (rows.length == 0) {
+        pool.query(
+          `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Exquisite Coin', '5front', '5back', '1987', '999', 'A truly exquisite coin from 1987', '1', '3', '1')`
+        );
+      }
+    });
+    
+    pool.query(`SELECT * FROM coins WHERE back_image_name='6back'`, (err, rows) => {
+      console.log(rows);
+      if (rows.length == 0) {
+        pool.query(
+          `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Magnificent Coin', '6front', '6back', '1996', '1299', 'A magnificent coin from 1996', '1', '3', '2')`
+        );
+      }
+    });
+    
+    pool.query(`SELECT * FROM coins WHERE back_image_name='7back'`, (err, rows) => {
+      console.log(rows);
+      if (rows.length == 0) {
+        pool.query(
+          `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Stunning Coin', '7front', '7back', '2001', '799', 'A stunning coin from 2001', '1', '4', '1')`
+        );
+      }
+    });
+    
+    pool.query(`SELECT * FROM coins WHERE back_image_name='8back'`, (err, rows) => {
+      console.log(rows);
+      if (rows.length == 0) {
+        pool.query(
+          `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Rare Coin', '8front', '8back', '1991', '1199', 'A rare and valuable coin from 1991', '1', '3', '2')`
+        );
+      }
+    });
+    
+    pool.query(`SELECT * FROM coins WHERE back_image_name='9back'`, (err, rows) => {
+      console.log(rows);
+      if (rows.length == 0) {
+        pool.query(
+          `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Beautiful Coin', '9front', '9back', '1998', '999', 'A beautiful and well-crafted coin from 1998', '1', '4', '0')`
+        );
+      }
+    });
+    
     pool.query(
-      `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Golden Treasure', '2front', '2back', '1995', '999', 'A beautiful and rare coin from 1995', '1', '3', '1')`
+      `SELECT * FROM coins WHERE back_image_name='10back'`,
+      (err, rows) => {
+        console.log(rows);
+        if (rows.length == 0) {
+          pool.query(
+            `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Distinguished Coin', '10front', '10back', '1995', '1299', 'A distinguished coin with a rich history', '1', '3', '1')`
+          );
+        }
+      }
     );
-
+    
     pool.query(
-      `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Mysterious Coin', '3front', '3back', '2000', '899', 'A unique and intriguing coin from 2000', '1', '2', '2')`
+      `SELECT * FROM coins WHERE back_image_name='11back'`,
+      (err, rows) => {
+        console.log(rows);
+        if (rows.length == 0) {
+          pool.query(
+            `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Exclusive Coin', '11front', '11back', '1993', '999', 'A highly exclusive and limited edition coin', '1', '4', '2')`
+          );
+        }
+      }
     );
-
+    
     pool.query(
-      `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Fabled Coin', '4front', '4back', '1990', '1499', 'A legendary coin with a rich history', '1', '2', '0')`
+      `SELECT * FROM coins WHERE back_image_name='12back'`,
+      (err, rows) => {
+        console.log(rows);
+        if (rows.length == 0) {
+          pool.query(
+            `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Cheap Coin', 'no-image', '12back', '2000', '99', 'A cheap and poorly-made coin from 2000', '1', '1', '1')`
+          );
+        }
+      }
     );
-
+    
     pool.query(
-      `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Exquisite Coin', '5front', '5back', '1987', '999', 'A truly exquisite coin from 1987', '1', '3', '1')`
+      `SELECT * FROM coins WHERE back_image_name='13back'`,
+      (err, rows) => {
+        console.log(rows);
+        if (rows.length == 0) {
+          pool.query(
+            `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Common Coin', 'no-image', '13back', '1990', '199', 'A common and uninteresting coin from 1990', '1', '1', '2')`
+          );
+        }
+      }
     );
-
+    
     pool.query(
-      `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Magnificent Coin', '6front', '6back', '1996', '1299', 'A magnificent coin from 1996', '1', '3', '2')`
+      `SELECT * FROM coins WHERE back_image_name='14back'`,
+      (err, rows) => {
+        console.log(rows);
+        if (rows.length == 0) {
+          pool.query(
+            `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Worthless Coin', 'no-image', '14back', '1995', '49', 'A virtually worthless coin from 1995', '1', '0', '0')`
+          );
+        }
+      }
     );
-
+    
     pool.query(
-      `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Stunning Coin', '7front', '7back', '2001', '799', 'A stunning coin from 2001', '1', '4', '1')`
+      `SELECT * FROM coins WHERE back_image_name='15back'`,
+      (err, rows) => {
+        console.log(rows);
+        if (rows.length == 0) {
+          pool.query(
+            `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Counterfeit Coin', 'no-image', '15back', '1985', '199', 'A fake and counterfeit coin from 1985', '1', '0', '1')`
+          );
+        }
+      }
     );
-
+    
     pool.query(
-      `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Rare Coin', '8front', '8back', '1991', '1199', 'A rare and valuable coin from 1991', '1', '3', '2')`
+      `SELECT * FROM coins WHERE back_image_name='16back'`,
+      (err, rows) => {
+        console.log(rows);
+        if (rows.length == 0) {
+          pool.query(
+            `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Damaged Coin', 'no-image', '16back', '1980', '99', 'A flawed and damaged coin from 1980', '1', '1', '2')`
+          );
+        }
+      }
     );
-
+    
     pool.query(
-      `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Beautiful Coin', '9front', '9back', '1998', '999', 'A beautiful and well-crafted coin from 1998', '1', '4', '0')`
-    );
-
-    pool.query(
-      `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Distinguished Coin', '10front', '10back', '1995', '1299', 'A distinguished coin with a rich history', '1', '3', '1')`
-    );
-
-    pool.query(
-      `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Exclusive Coin', '11front', '11back', '1993', '999', 'A highly exclusive and limited edition coin', '1', '4', '2')`
-    );
-
-    pool.query(
-      `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Cheap Coin', 'no-image', '12back', '2000', '99', 'A cheap and poorly-made coin from 2000', '1', '1', '1')`
-    );
-
-    pool.query(
-      `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Common Coin', 'no-image', '13back', '1990', '199', 'A common and uninteresting coin from 1990', '1', '1', '2')`
-    );
-
-    pool.query(
-      `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Worthless Coin', 'no-image', '14back', '1995', '49', 'A virtually worthless coin from 1995', '1', '0', '0')`
-    );
-
-    pool.query(
-      `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Counterfeit Coin', 'no-image', '15back', '1985', '199', 'A fake and counterfeit coin from 1985', '1', '0', '1')`
-    );
-
-    pool.query(
-      `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Damaged Coin', 'no-image', '16back', '1980', '99', 'A flawed and damaged coin from 1980', '1', '1', '2')`
-    );
-
-    pool.query(
-      `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Poorly-Made Coin', 'no-image', '17back', '1995', '69', 'A shoddy and poorly-made coin from 1995', '1', '0', '0')`
+      `SELECT * FROM coins WHERE back_image_name='17back'`,
+      (err, rows) => {
+        console.log(rows);
+        if (rows.length == 0) {
+          pool.query(
+            `INSERT INTO coins (name, front_image_name, back_image_name, year, price, description, status, rating, manufacturer) VALUES ('Poorly-Made Coin', 'no-image', '17back', '1995', '69', 'A shoddy and poorly-made coin from 1995', '1', '0', '0')`
+          );
+        }
+      }
     );
   }
 );
