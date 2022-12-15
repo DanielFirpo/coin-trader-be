@@ -157,7 +157,9 @@ router.post("/edit", adminRestricted, multer().single("front"),(req, res) => {
         });
       }
       console.log("worked", req.file)
+      if (req.file) {
       fs.writeFileSync(path.join(path.dirname(__filename), "..", "..", "public", "images", "products", req.body.front_image_name + ".png"), req.file.buffer);
+      }
       return res.status(200).send({ message: "Edited product successfully." });
     }
   );
