@@ -27,7 +27,7 @@
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
     "nodemailer": "^6.4.10",
-    "nodemon": "^2.0.3",
+    "nodemon": "^2.0.20",
     "password-validator": "^5.0.3",
     "paypal-rest-sdk": "^1.8.1",
     "qs": "^6.9.3",
